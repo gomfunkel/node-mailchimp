@@ -25,6 +25,11 @@ If you don't have npm installed or don't want to use it:
     cd ~/.node_libraries
     git clone git://github.com/gomfunkel/node-mailchimp.git mailchimp
 
+Please note that parts of _node-mailchimp_ depend on 
+[request](http://github.com/mikeal/node-utils/tree/master/request) by 
+[Mikeal Rogers](http://github.com/mikeal). This library needs to be installed 
+for the API and Export API to work.
+
 Usage
 -----
 
