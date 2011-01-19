@@ -3,7 +3,7 @@ node-mailchimp
 
 A node.js wrapper for the MailChimp API.
 
-node-mailchimp exposes the following features of the MailChimp API to your
+_node-mailchimp_ exposes the following features of the MailChimp API to your
 node.js application:
  
  * MailChimp API (Version 1.3)
@@ -67,7 +67,7 @@ MailChimp Export API:
     var apiKey = 'Your MailChimp API Key';
 
     try { 
-        var api = new MailChimpExportAPI(apiKey, { version : '1.0', secure: false });
+        var exportApi = new MailChimpExportAPI(apiKey, { version : '1.0', secure: false });
     } catch (error) {
         console.log('Error: ' + error);
     }
@@ -106,4 +106,4 @@ ToDo / Ideas
 License
 -------
 
-node-mailchimp is licensed under the MIT License. (See LICENSE) 
+_node-mailchimp_ is licensed under the MIT License. (See LICENSE) 
