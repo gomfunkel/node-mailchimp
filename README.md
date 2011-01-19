@@ -6,7 +6,7 @@ A node.js wrapper for the MailChimp API.
 _node-mailchimp_ exposes the following features of the MailChimp API to your
 node.js application:
  
- * MailChimp API (Version 1.3)
+ * MailChimp API (Version 1.3 and 1.2)
  * MailChimp Export API (Version 1.0)
  * MailChimp Webhooks 
 
@@ -105,7 +105,7 @@ MailChimp Webhooks:
 ToDo / Ideas
 ------------
 
- * Implement API versions 1.1 and 1.2
+ * Implement API version 1.1
  * Webhooks over HTTPS
     
 License
