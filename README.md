@@ -6,7 +6,8 @@ _node-mailchimp_ exposes the following features of the MailChimp API to your nod
  
  * MailChimp API (Versions 1.3, 1.2 and 1.1)
  * MailChimp Export API (Version 1.0)
- * MailChimp Webhooks 
+ * MailChimp Webhooks
+ * MailChimp STS API (Version 1.0)
 
 Further information on the MailChimp API and its features is available at [http://www.mailchimp.com/api/](http://www.mailchimp.com/api/)
 
@@ -122,6 +123,34 @@ Example:
     
     webhook.on('unsubscribe', function (data, meta) {
         console.log(data.email+' unsubscribed from your newsletter!'); // Do something with your data!
+    });
+    
+### MailChimp STS API
+
+_MailChimpSTSAPI_ takes two arguments. The first argument is your API key, which you can find in your MailChimp Account. The second argument is an options object which can contain the following options:
+
+ * `version` The STS API version to use, currently on 1.0 is available and supported. Defaults to 1.0.
+ * `secure` Whether or not to use secure connections over HTTPS (true/false). Defaults to false.
+ 
+The callback function for each API method gets one argument, an object with all information retrieved or an error message if an error occurred. 
+
+Example:
+
+    var MailChimpSTSAPI = require('mailchimp').MailChimpSTSAPI;
+    
+    var apiKey = 'Your MailChimp API Key';
+
+    try { 
+        var stsApi = new MailChimpSTSAPI(apiKey, { version : '1.0', secure: false });
+    } catch (error) {
+        console.log('Error: ' + error);
+    }
+
+    stsApi.VerifyEmailAdress({ email : '/* E-MAIL ADDRESS */'  }, function (data) {
+        if (data.error)
+            console.log('Error: '+data.error+' ('+data.code+')');
+        else
+            console.log(data); // Do something with your data!
     });
     
 ## License
