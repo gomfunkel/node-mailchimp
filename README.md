@@ -26,7 +26,7 @@ Please note that parts of _node-mailchimp_ depend on [request](http://github.com
 
 ## Usage
 
-Information on how to use the three features of the MailChimp API can be found below. Further information on the API methods available can be found at [http://www.mailchimp.com/api/](http://www.mailchimp.com/api/). You can also find further information on how to obtain an API key, how to set up Webhooks in your MailChimp account and much more on the MailChimp API pages.
+Information on how to use the MailChimp APIs can be found below. Further information on the API methods available can be found at [http://apidocs.mailchimp.com/](http://apidocs.mailchimp.com/). You can also find further information on how to obtain an API key, how to set up Webhooks in your MailChimp account and much more on the MailChimp API pages.
 
 ### MailChimp API
 
