@@ -35,6 +35,7 @@ _MailChimpAPI_ takes two arguments. The first argument is your API key, which yo
 
  * `version` The API version to use (1.1, 1.2 or 1.3). Defaults to 1.3.
  * `secure` Whether or not to use secure connections over HTTPS (true/false). Defaults to false.
+ * `userAgent` Custom User-Agent description to use in the request header.
  
 The callback function for each API method gets one argument, an object with all information retrieved or an error message if an error occurred.
 
@@ -70,6 +71,7 @@ _MailChimpExportAPI_ takes two arguments. The first argument is your API key, wh
 
  * `version` The Export API version to use, currently on 1.0 is available and supported. Defaults to 1.0.
  * `secure` Whether or not to use secure connections over HTTPS (true/false). Defaults to false.
+ * `userAgent` Custom User-Agent description to use in the request header.
  
 The callback function for the only Export API method at the moment (_list_) gets one argument, an object with all information retrieved or an error message if an error occurred. 
 
@@ -132,6 +134,7 @@ _MailChimpSTSAPI_ takes two arguments. The first argument is your API key, which
 
  * `version` The STS API version to use, currently on 1.0 is available and supported. Defaults to 1.0.
  * `secure` Whether or not to use secure connections over HTTPS (true/false). Defaults to false.
+ * `userAgent` Custom User-Agent description to use in the request header.
  
 The callback function for each API method gets one argument, an object with all information retrieved or an error message if an error occurred. 
 
