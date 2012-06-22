@@ -23,7 +23,7 @@ If you don't have npm installed or don't want to use it:
     cd ~/.node_libraries
     git clone git://github.com/gomfunkel/node-mailchimp.git mailchimp
 
-Please note that parts of _node-mailchimp_ depend on [request](http://github.com/mikeal/request) by [Mikeal Rogers](http://github.com/mikeal). This library needs to be installed for the API and Export API to work. If you are using npm this dependency should be automagically resolved for you.
+Please note that parts of _node-mailchimp_ depend on [request](http://github.com/mikeal/request) by [Mikeal Rogers](http://github.com/mikeal). This library needs to be installed for the API and Export API to work. Additionally [node-querystring](http://github.com/visionmedia/node-querystring) is needed for the Webhooks to work. If you are using npm all dependencies should be automagically resolved for you.
 
 ## Usage
 
