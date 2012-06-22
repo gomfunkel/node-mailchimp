@@ -1,6 +1,6 @@
 {
 	"name" : "mailchimp",
-	"version" : "0.8.1",
+	"version" : "0.8.2",
 	"description" : "A node.js wrapper for the MailChimp API.",
 	"author" : "Daniel Leinich <leinich@gmx.net>",
 	"main" : "./lib/mailchimp",
@@ -9,6 +9,7 @@
 		"url" : "http://github.com/gomfunkel/node-mailchimp.git"
 	},
 	"dependencies": {
-		"request": ">= 0.10.0"
+		"request": ">= 0.10.0",
+		"qs": ">= 0.5.0" 
 	}
 }
