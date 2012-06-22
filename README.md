@@ -9,6 +9,7 @@ _node-mailchimp_ exposes the following features of the MailChimp API to your nod
  * MailChimp Webhooks
  * MailChimp STS API (Version 1.0)
  * MailChimp OAuth2 authorization
+ * Mandrill API (Version 1.0) __\*EXPERIMENTAL\*__
 
 Further information on the MailChimp API and its features is available at [http://apidocs.mailchimp.com](http://apidocs.mailchimp.com)
 
@@ -69,7 +70,7 @@ Example:
 
 _MailChimpExportAPI_ takes two arguments. The first argument is your API key, which you can find in your MailChimp Account. The second argument is an options object which can contain the following options:
 
- * `version` The Export API version to use, currently on 1.0 is available and supported. Defaults to 1.0.
+ * `version` The Export API version to use, currently only 1.0 is available and supported. Defaults to 1.0.
  * `secure` Whether or not to use secure connections over HTTPS (true/false). Defaults to false.
  * `userAgent` Custom User-Agent description to use in the request header.
  
@@ -132,7 +133,7 @@ Example:
 
 _MailChimpSTSAPI_ takes two arguments. The first argument is your API key, which you can find in your MailChimp Account. The second argument is an options object which can contain the following options:
 
- * `version` The STS API version to use, currently on 1.0 is available and supported. Defaults to 1.0.
+ * `version` The STS API version to use, currently only 1.0 is available and supported. Defaults to 1.0.
  * `secure` Whether or not to use secure connections over HTTPS (true/false). Defaults to false.
  * `userAgent` Custom User-Agent description to use in the request header.
  
@@ -209,6 +210,58 @@ Example:
 	    });
 		
 	});
+	
+### Mandrill API \*EXPERIMENTAL\*
+
+_MandrillAPI_ is experimental as of yet which means: It should work but it is far from being properly tested.  
+
+_MandrillAPI_ takes two arguments. The first argument is your API key, which you can find in your Mandrill Account. The second argument is an options object which can contain the following options:
+
+ * `version` The Mandrill API version to use, currently only 1.0 is available and supported. Defaults to 1.0.
+ * `secure` Whether or not to use secure connections over HTTPS (true/false). Defaults to false.
+ * `userAgent` Custom User-Agent description to use in the request header.
+
+All of the API categories and methods described in the Mandrill API Documentation ([http://apidocs.mailchimp.com](http://apidocs.mailchimp.com)) are available in this wrapper. The method names in this wrapper reflect the method names of the API and are named `category`\_`method` with dashes (-) in method names being replaced by underscores (\_).
+ 
+The callback function for each API method gets one argument, an object with all information retrieved or an error message if an error occurred. 
+
+Example:
+
+    var MandrillAPI = require('mailchimp').MandrillAPI;
+    
+    var apiKey = 'Your Mandrill API Key';
+
+    try { 
+        var mandrill = new MandrillAPI(apiKey, { version : '1.0', secure: false });
+    } catch (error) {
+        console.log('Error: ' + error);
+    }
+
+    mandrill.tags_time_series({ tag : '/* TAGNAME */'  }, function (data) {
+        if (data.error)
+            console.log('Error: '+data.error+' ('+data.code+')');
+        else
+            console.log(data); // Do something with your data!
+    });
+    
+A second way to use the Mandrill API is by using the `call` method. This method differentiates between the categories and methods of the Mandrill API more clearly and automatically converts dashes to underscores. The example above using the `call` method looks like the this:
+
+    var MandrillAPI = require('mailchimp').MandrillAPI;
+    
+    var apiKey = 'Your Mandrill API Key';
+
+    try { 
+        var mandrill = new MandrillAPI(apiKey, { version : '1.0', secure: false });
+    } catch (error) {
+        console.log('Error: ' + error);
+    }
+
+    mandrill.call('tags', 'time-series', { tag : '/* TAGNAME */'  }, function (data) {
+        if (data.error)
+            console.log('Error: '+data.error+' ('+data.code+')');
+        else
+            console.log(data); // Do something with your data!
+    });
 	
 ## License
 
