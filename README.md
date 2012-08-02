@@ -13,6 +13,12 @@ _node-mailchimp_ exposes the following features of the MailChimp API to your nod
 
 Further information on the MailChimp API and its features is available at [http://apidocs.mailchimp.com](http://apidocs.mailchimp.com)
 
+## Attention! API changes coming up!
+
+Version 0.9.0 of _node-mailchimp_ will include API changes that will most proabably break your existing applications. The reason for the changes is being more compliant to node.js code conventions regarding error handling. Please make sure that your applications are refactored to use the new API when updating.
+
+The following documentation is valid for _node-mailchimp_ versions smaller than 0.9.0. The updated documentation with examples will be available along with the 0.9.0 release.
+
 ## Installation
 
 Installing using npm (node package manager):
