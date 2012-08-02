@@ -42,31 +42,29 @@ The callback function for each API method gets one argument, an object with all 
 
 Example:
 
-«««javascript
-var MailChimpAPI = require('mailchimp').MailChimpAPI;
-
-var apiKey = 'Your MailChimp API Key';
-
-try { 
-    var api = new MailChimpAPI(apiKey, { version : '1.3', secure : false });
-} catch (error) {
-    console.log('Error: ' + error);
-}
-
-api.campaigns({ start: 0, limit: 25 }, function (data) {
-    if (data.error)
-        console.log('Error: '+data.error+' ('+data.code+')');
-    else
-        console.log(JSON.stringify(data)); // Do something with your data!
-});
-
-api.campaignStats({ cid : '/* CAMPAIGN ID */' }, function (data) {
-    if (data.error)
-        console.log('Error: '+data.error+' ('+data.code+')');
-    else
-        console.log(JSON.stringify(data)); // Do something with your data!
-});
-«««
+    var MailChimpAPI = require('mailchimp').MailChimpAPI;
+    
+    var apiKey = 'Your MailChimp API Key';
+    
+    try { 
+        var api = new MailChimpAPI(apiKey, { version : '1.3', secure : false });
+    } catch (error) {
+        console.log('Error: ' + error);
+    }
+    
+    api.campaigns({ start: 0, limit: 25 }, function (data) {
+        if (data.error)
+            console.log('Error: '+data.error+' ('+data.code+')');
+        else
+            console.log(JSON.stringify(data)); // Do something with your data!
+    });
+    
+    api.campaignStats({ cid : '/* CAMPAIGN ID */' }, function (data) {
+        if (data.error)
+            console.log('Error: '+data.error+' ('+data.code+')');
+        else
+            console.log(JSON.stringify(data)); // Do something with your data!
+    });
     
 ### MailChimp Export API
 
@@ -80,25 +78,23 @@ The callback function for the only Export API method at the moment (_list_) gets
 
 Example:
 
-«««javascript
-var MailChimpExportAPI = require('mailchimp').MailChimpExportAPI;
+    var MailChimpExportAPI = require('mailchimp').MailChimpExportAPI;
+    
+    var apiKey = 'Your MailChimp API Key';
 
-var apiKey = 'Your MailChimp API Key';
+    try { 
+        var exportApi = new MailChimpExportAPI(apiKey, { version : '1.0', secure: false });
+    } catch (error) {
+        console.log('Error: ' + error);
+    }
 
-try { 
-    var exportApi = new MailChimpExportAPI(apiKey, { version : '1.0', secure: false });
-} catch (error) {
-    console.log('Error: ' + error);
-}
-
-exportApi.list({ id : '/* LIST ID */'  }, function (data) {
-    if (data.error)
-        console.log('Error: '+data.error+' ('+data.code+')');
-    else
-        console.log(data); // Do something with your data!
-});
-«««
-
+    exportApi.list({ id : '/* LIST ID */'  }, function (data) {
+        if (data.error)
+            console.log('Error: '+data.error+' ('+data.code+')');
+        else
+            console.log(data); // Do something with your data!
+    });
+    
 ### MailChimp Webhooks
 
 _MailChimpWebhook_ takes one argument, an options object which can contain the following options:
@@ -117,23 +113,21 @@ You can register the following events. The callback function for each of these e
   
 Example:
 
-«««javascript
-var MailChimpWebhook = require('mailchimp').MailChimpWebhook;
-
-var webhook = new MailChimpWebhook();
-
-webhook.on('error', function (message) {
-    console.log('Error: '+message);
-});
-
-webhook.on('subscribe', function (data, meta) {
-    console.log(data.email+' subscribed to your newsletter!'); // Do something with your data!
-});
-
-webhook.on('unsubscribe', function (data, meta) {
-    console.log(data.email+' unsubscribed from your newsletter!'); // Do something with your data!
-});
-«««
+    var MailChimpWebhook = require('mailchimp').MailChimpWebhook;
+    
+    var webhook = new MailChimpWebhook();
+    
+    webhook.on('error', function (message) {
+        console.log('Error: '+message);
+    });
+    
+    webhook.on('subscribe', function (data, meta) {
+        console.log(data.email+' subscribed to your newsletter!'); // Do something with your data!
+    });
+    
+    webhook.on('unsubscribe', function (data, meta) {
+        console.log(data.email+' unsubscribed from your newsletter!'); // Do something with your data!
+    });
     
 ### MailChimp STS API
 
@@ -147,24 +141,22 @@ The callback function for each API method gets one argument, an object with all 
 
 Example:
 
-«««javascript
-var MailChimpSTSAPI = require('mailchimp').MailChimpSTSAPI;
+    var MailChimpSTSAPI = require('mailchimp').MailChimpSTSAPI;
+    
+    var apiKey = 'Your MailChimp API Key';
 
-var apiKey = 'Your MailChimp API Key';
+    try { 
+        var stsApi = new MailChimpSTSAPI(apiKey, { version : '1.0', secure: false });
+    } catch (error) {
+        console.log('Error: ' + error);
+    }
 
-try { 
-    var stsApi = new MailChimpSTSAPI(apiKey, { version : '1.0', secure: false });
-} catch (error) {
-    console.log('Error: ' + error);
-}
-
-stsApi.VerifyEmailAdress({ email : '/* E-MAIL ADDRESS */'  }, function (data) {
-    if (data.error)
-        console.log('Error: '+data.error+' ('+data.code+')');
-    else
-        console.log(data); // Do something with your data!
-});
-«««
+    stsApi.VerifyEmailAdress({ email : '/* E-MAIL ADDRESS */'  }, function (data) {
+        if (data.error)
+            console.log('Error: '+data.error+' ('+data.code+')');
+        else
+            console.log(data); // Do something with your data!
+    });
     
 ### MailChimp OAuth2
 
@@ -184,42 +176,40 @@ You can register the following events:
   
 Example:
 
-«««javascript
-var MailChimpOAuth = require('mailchimp').MailChimpOAuth;
-var MailChimpAPI = require('mailchimp').MailChimpAPI;
-
-var options = {
-	clientId: 'Your MailChimp client id',
-	clientSecret: 'Your MailChimp client secret',
-	serverUri: 'http://www.example.com',
-	redirectUri: 'http://www.example.com/successfulLogin.html'
-};
-
-var oauth = new MailChimpOAuth(options);
-
-console.log(oauth.getAuthorizeUri()); // The MailChimp login URI the user needs to be sent to
-
-oauth.on('error', function (message) {
-    console.log('Error: '+message);
-});
-
-oauth.on('authed', function (apiKey) {
+	var MailChimpOAuth = require('mailchimp').MailChimpOAuth;
+	var MailChimpAPI = require('mailchimp').MailChimpAPI;
 	
-	try { 
-	    var api = new MailChimpAPI(apiKey, { version : '1.3', secure : false });
-	} catch (error) {
-	    console.log('Error: ' + error);
-	}
+	var options = {
+		clientId: 'Your MailChimp client id',
+		clientSecret: 'Your MailChimp client secret',
+		serverUri: 'http://www.example.com',
+		redirectUri: 'http://www.example.com/successfulLogin.html'
+	};
 	
-    api.campaigns({ start: 0, limit: 25 }, function (data) {
-        if (data.error)
-            console.log('Error: '+data.error+' ('+data.code+')');
-        else
-            console.log(JSON.stringify(data)); // Do something with your data!
-    });
+	var oauth = new MailChimpOAuth(options);
 	
-});
-«««
+	console.log(oauth.getAuthorizeUri()); // The MailChimp login URI the user needs to be sent to
+	
+	oauth.on('error', function (message) {
+	    console.log('Error: '+message);
+	});
+	
+	oauth.on('authed', function (apiKey) {
+		
+		try { 
+		    var api = new MailChimpAPI(apiKey, { version : '1.3', secure : false });
+		} catch (error) {
+		    console.log('Error: ' + error);
+		}
+		
+	    api.campaigns({ start: 0, limit: 25 }, function (data) {
+	        if (data.error)
+	            console.log('Error: '+data.error+' ('+data.code+')');
+	        else
+	            console.log(JSON.stringify(data)); // Do something with your data!
+	    });
+		
+	});
 	
 ### Mandrill API \*EXPERIMENTAL\*
 
@@ -237,45 +227,41 @@ The callback function for each API method gets one argument, an object with all 
 
 Example:
 
-«««javascript
-var MandrillAPI = require('mailchimp').MandrillAPI;
+    var MandrillAPI = require('mailchimp').MandrillAPI;
+    
+    var apiKey = 'Your Mandrill API Key';
 
-var apiKey = 'Your Mandrill API Key';
+    try { 
+        var mandrill = new MandrillAPI(apiKey, { version : '1.0', secure: false });
+    } catch (error) {
+        console.log('Error: ' + error);
+    }
 
-try { 
-    var mandrill = new MandrillAPI(apiKey, { version : '1.0', secure: false });
-} catch (error) {
-    console.log('Error: ' + error);
-}
-
-mandrill.tags_time_series({ tag : '/* TAGNAME */'  }, function (data) {
-    if (data.error)
-        console.log('Error: '+data.error+' ('+data.code+')');
-    else
-        console.log(data); // Do something with your data!
-});
-«««
-
+    mandrill.tags_time_series({ tag : '/* TAGNAME */'  }, function (data) {
+        if (data.error)
+            console.log('Error: '+data.error+' ('+data.code+')');
+        else
+            console.log(data); // Do something with your data!
+    });
+    
 A second way to use the Mandrill API is by using the `call` method. This method differentiates between the categories and methods of the Mandrill API more clearly and automatically converts dashes to underscores. The example above using the `call` method looks like the this:
 
-«««javascript
-var MandrillAPI = require('mailchimp').MandrillAPI;
+    var MandrillAPI = require('mailchimp').MandrillAPI;
+    
+    var apiKey = 'Your Mandrill API Key';
 
-var apiKey = 'Your Mandrill API Key';
+    try { 
+        var mandrill = new MandrillAPI(apiKey, { version : '1.0', secure: false });
+    } catch (error) {
+        console.log('Error: ' + error);
+    }
 
-try { 
-    var mandrill = new MandrillAPI(apiKey, { version : '1.0', secure: false });
-} catch (error) {
-    console.log('Error: ' + error);
-}
-
-mandrill.call('tags', 'time-series', { tag : '/* TAGNAME */'  }, function (data) {
-    if (data.error)
-        console.log('Error: '+data.error+' ('+data.code+')');
-    else
-        console.log(data); // Do something with your data!
-});
-«««
+    mandrill.call('tags', 'time-series', { tag : '/* TAGNAME */'  }, function (data) {
+        if (data.error)
+            console.log('Error: '+data.error+' ('+data.code+')');
+        else
+            console.log(data); // Do something with your data!
+    });
 	
 ## License
 
