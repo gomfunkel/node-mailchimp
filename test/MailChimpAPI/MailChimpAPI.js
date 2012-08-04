@@ -23,7 +23,7 @@ vows.describe('MailChimpAPI').addBatch({
 		},
 		
 		'without API key but with parameters': {
-			topic: function () { new MailChimpAPI({ version: '1.3' }) },
+			topic: function () { return new MailChimpAPI({ version: '1.3' }) },
 			'throws an error': function (topic) {
 				assert.throws(topic, Error);
 			}			
