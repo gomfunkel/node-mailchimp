@@ -18,6 +18,7 @@ Further information on the MailChimp API and its features is available at [http:
 Version 0.9.0 of _node-mailchimp_ changed the API so that most of your existing applications developed with earlier versions will most probably break. The reason for the changes is being more compliant to node.js code conventions regarding error handling. Please make sure that your applications are refactored to use the new API when updating.
 
 The two important changes are:
+
 1. When throwing errors an error object is now thrown instead of a string like in earlier versions.
 2. Every callback now receives two arguments: The first one is an error object which is null when no error occured, the second one the actual data.
 
