@@ -15,7 +15,7 @@ Further information on the MailChimp API and its features is available at [http:
 
 ## Attention: API changes in 0.9.0
 
-Version 0.9.0 of _node-mailchimp_ changed the API so that most of your existing applications developed with earlier versions will most probably break. The reason for the changes is being more compliant to node.js code conventions regarding error handling. Please make sure that your applications are refactored to use the new API when updating.
+Version 0.9.0 of _node-mailchimp_ changed the API so that your existing applications developed with earlier versions will most probably break. The reason for the changes is being more compliant to node.js code conventions regarding error handling. Please make sure that your applications are refactored to use the new API when updating.
 
 The two important changes are:
 
@@ -134,7 +134,7 @@ var MailChimpWebhook = require('mailchimp').MailChimpWebhook;
 var webhook = new MailChimpWebhook();
 
 webhook.on('error', function (message) {
-    console.log('Error: '+message);
+    console.log(error.message);
 });
 
 webhook.on('subscribe', function (data, meta) {
@@ -211,7 +211,7 @@ var oauth = new MailChimpOAuth(options);
 console.log(oauth.getAuthorizeUri()); // The MailChimp login URI the user needs to be sent to
 
 oauth.on('error', function (message) {
-    console.log('Error: '+message);
+    console.log(error.message);
 });
 
 oauth.on('authed', function (apiKey) {
