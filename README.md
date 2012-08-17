@@ -133,7 +133,7 @@ var MailChimpWebhook = require('mailchimp').MailChimpWebhook;
 
 var webhook = new MailChimpWebhook();
 
-webhook.on('error', function (message) {
+webhook.on('error', function (error) {
     console.log(error.message);
 });
 
@@ -210,7 +210,7 @@ var oauth = new MailChimpOAuth(options);
 
 console.log(oauth.getAuthorizeUri()); // The MailChimp login URI the user needs to be sent to
 
-oauth.on('error', function (message) {
+oauth.on('error', function (error) {
     console.log(error.message);
 });
 
