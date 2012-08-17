@@ -9,7 +9,7 @@ _node-mailchimp_ exposes the following features of the MailChimp API to your nod
  * MailChimp Webhooks
  * MailChimp STS API (Version 1.0)
  * MailChimp OAuth2 authorization
- * Mandrill API (Version 1.0) __\*EXPERIMENTAL\*__
+ * Mandrill API (Version 1.0)
 
 Further information on the MailChimp API and its features is available at [http://apidocs.mailchimp.com](http://apidocs.mailchimp.com)
 
@@ -232,9 +232,7 @@ oauth.on('authed', function (apiKey) {
 });
 ```
 	
-### Mandrill API \*EXPERIMENTAL\*
-
-_MandrillAPI_ is experimental as of yet which means: It should work but it is far from being properly tested.  
+### Mandrill API
 
 _MandrillAPI_ takes two arguments. The first argument is your API key, which you can find in your Mandrill Account. The second argument is an options object which can contain the following options:
 
