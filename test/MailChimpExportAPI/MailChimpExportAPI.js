@@ -19,6 +19,7 @@ vows.describe('MailChimpExportAPI').addBatch({
 			topic: function () { return new MailChimpExportAPI('apiKey-dc') },
 			'successfully creates an instance': function (topic) {
 				assert.isObject(topic);
+				assert.strictEqual(topic.version, '1.0');
 			}			
 		},
 		
@@ -33,6 +34,7 @@ vows.describe('MailChimpExportAPI').addBatch({
 			topic: function () { return new MailChimpExportAPI('apiKey-dc', { version: '1.0' }) },
 			'successfully creates an instance': function (topic) {
 				assert.isObject(topic);
+				assert.strictEqual(topic.version, '1.0');
 			}			
 		},
 		
