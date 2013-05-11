@@ -256,7 +256,7 @@ The callback function for each API method gets two arguments. The first one is a
 Example:
 
 ```javascript
-var MailChimpAPI = require('mailchimp').MailChimpPartnerAPI;
+var MailChimpPartnerAPI = require('mailchimp').MailChimpPartnerAPI;
 
 var appKey = 'Your MailChimp app key';
 
