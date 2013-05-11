@@ -88,7 +88,7 @@ api.campaignStats({ cid : '/* CAMPAIGN ID */' }, function (error, data) {
         console.log(JSON.stringify(data)); // Do something with your data!
 });
 ```
-    
+
 ### MailChimp Export API
 
 _MailChimpExportAPI_ takes two arguments. The first argument is your API key, which you can find in your MailChimp Account. The second argument is an options object which can contain the following options:
@@ -239,6 +239,37 @@ oauth.on('authed', function (apiKey) {
             console.log(JSON.stringify(data)); // Do something with your data!
     });
 	
+});
+```
+
+### MailChimp Partner API
+
+_MailChimpPartnerAPI_ takes two arguments. The first argument is your app key, which you can generate and find in your MailChimp Account, if you are eligible to use the Partner API. The second argument is an options object which can contain the following options:
+
+ * `version` The Partner API version to use, currently only 1.3 is available and supported. Defaults to 1.3.
+ * `secure` Whether or not to use secure connections over HTTPS (true/false). Defaults to false.
+ * `userAgent` Custom User-Agent description to use in the request header.
+ 
+The callback function for each API method gets two arguments. The first one is an error object which is null when no error occured, the second one an object with all information retrieved as long as no error occured.
+
+Example:
+
+```javascript
+var MailChimpAPI = require('mailchimp').MailChimpPartnerAPI;
+
+var appKey = 'Your MailChimp app key';
+
+try { 
+    var api = new MailChimpPartnerAPI(appKey, { version : '1.3', secure : false });
+} catch (error) {
+    console.log(error.message);
+}
+
+api.checkUsername({ username: '/* USERNAME */' }, function (error, data) {
+    if (error)
+        console.log(error.message);
+    else
+        console.log(JSON.stringify(data)); // Do something with your data!
 });
 ```
 	
