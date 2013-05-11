@@ -9,6 +9,7 @@ _node-mailchimp_ exposes the following features of the MailChimp API to your nod
  * MailChimp Webhooks
  * MailChimp STS API (Version 1.0)
  * MailChimp OAuth2 authorization
+ * MailChimp Partner API (Version 1.3)
  * Mandrill API (Version 1.0)
 
 Further information on the MailChimp API and its features is available at [http://apidocs.mailchimp.com](http://apidocs.mailchimp.com)
