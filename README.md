@@ -41,6 +41,16 @@ Please note that parts of _node-mailchimp_ depend on [request](http://github.com
 
 Information on how to use the MailChimp APIs can be found below. Further information on the API methods available can be found at [http://apidocs.mailchimp.com](http://apidocs.mailchimp.com). You can also find further information on how to obtain an API key, how to set up Webhooks and/or OAuth2 in your MailChimp account and much more on the MailChimp API pages.
 
+Some methods of the MailChimp API take associative arrays as a parameter, for example the parameter `merge_vars` of the [`listSubscribe`](http://apidocs.mailchimp.com/api/1.3/listsubscribe.func.php) method. As there are no associative arrays in JavaScript you simply use an object with its properties being the keys, like in the following example:
+
+```javascript
+var merge_vars = {
+	EMAIL: '/* E-MAIL ADDRESS */',
+	FNAME: '/* FIRST NAME */',
+	LNAME: '/* LAST NAME */'
+};
+```
+
 ### MailChimp API
 
 _MailChimpAPI_ takes two arguments. The first argument is your API key, which you can find in your MailChimp Account. The second argument is an options object which can contain the following options:
