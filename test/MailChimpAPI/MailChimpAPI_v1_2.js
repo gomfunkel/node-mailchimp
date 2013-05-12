@@ -2,13 +2,13 @@ var assert = require('assert'),
     vows = require('vows'),
     nock = require('nock');
 
-var apiEndpoint = nock('http://dc.api.mailchimp.com:80').post('/1.2/?output=json&method=inlineCss', { apikey: "apiKey-dc" })
-                                                        .reply(200, '{"error":"You must specify a html value for the inlineCss method","code":-90}')
-                                                        .post('/1.2/?output=json&method=inlineCss', { apikey: "apiKey-dc", html: "<html><head><style>body { background-color: #f00; }</style></head><body></body></html>" })
+var apiEndpoint = nock('http://dc.api.mailchimp.com:80').post('/1.2/?output=json&method=inlineCss', encodeURIComponent(JSON.stringify({ apikey: "apiKey-dc", html: "<html><head><style>body { background-color: #f00; }</style></head><body></body></html>" })))
                                                         .reply(200, "\"<html><head><style>body { background-color: #f00; }<\\/style><\\/head><body style=\\\"background-color: #f00;\\\"><\\/body><\\/html>\"")
-                                                        .post('/1.2/?output=json&method=inlineCss', { apikey: "apiKey-dc", html: "<html><head><style>body { background-color: #f00; }</style></head><body></body></html>", strip_css: "true" })
+                                                        .post('/1.2/?output=json&method=inlineCss', encodeURIComponent(JSON.stringify({ apikey: "apiKey-dc" })))
+                                                        .reply(200, '{"error":"You must specify a html value for the inlineCss method","code":-90}')
+                                                        .post('/1.2/?output=json&method=inlineCss', encodeURIComponent(JSON.stringify({ apikey: "apiKey-dc", html: "<html><head><style>body { background-color: #f00; }</style></head><body></body></html>", strip_css: "true" })))
                                                         .reply(200, "\"<html><head><\\/head><body style=\\\"background-color: #f00;\\\"><\\/body><\\/html>\"")
-                                                        .post('/1.2/?output=json&method=inlineCss', { apikey: "apiKey-dc", html: "<html><head><style>body { background-color: #f00; }</style></head><body></body></html>", strip_css: "true" })
+                                                        .post('/1.2/?output=json&method=inlineCss', encodeURIComponent(JSON.stringify({ apikey: "apiKey-dc", html: "<html><head><style>body { background-color: #f00; }</style></head><body></body></html>", strip_css: "true" })))
                                                         .reply(200, "\"<html><head><\\/head><body style=\\\"background-color: #f00;\\\"><\\/body><\\/html>\"");
 
 var MailChimpAPI = require('mailchimp').MailChimpAPI;
