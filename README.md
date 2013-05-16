@@ -307,7 +307,7 @@ mandrill.tags_time_series({ tag : '/* TAGNAME */'  }, function (error, data) {
 });
 ```
     
-A second way to use the Mandrill API is by using the `call` method. This method differentiates between the categories and methods of the Mandrill API more clearly and automatically converts dashes to underscores. The example above using the `call` method looks like the this:
+A second way to use the Mandrill API is by using the `call` method. This method differentiates between the categories and methods of the Mandrill API more clearly and automatically converts dashes to underscores. The example above using the `call` method looks like this:
 
 ```javascript
 var MandrillAPI = require('mailchimp').MandrillAPI;
