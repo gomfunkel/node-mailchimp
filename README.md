@@ -12,18 +12,7 @@ _node-mailchimp_ exposes the following features of the MailChimp API to your nod
  * MailChimp Partner API (Version 1.3)
  * Mandrill API (Version 1.0)
 
-Further information on the MailChimp API and its features is available at [http://apidocs.mailchimp.com](http://apidocs.mailchimp.com)
-
-## Attention: API changes in 0.9.0
-
-Version 0.9.0 of _node-mailchimp_ changed the API so that your existing applications developed with earlier versions will most probably break. The reason for the changes is being more compliant to node.js code conventions regarding error handling. Please make sure that your applications are refactored to use the new API when updating.
-
-The two important changes are:
-
-1. When throwing errors an error object is now thrown instead of a string like in earlier versions.
-2. Every callback now receives two arguments: The first one is an error object which is null when no error occured, the second one the actual data.
-
-The following documentation is using the new API, please refer to it for examples. 
+Further information on the MailChimp API and its features is available at [http://apidocs.mailchimp.com](http://apidocs.mailchimp.com). If you want to know more about the Mandrill API and its features have a look at [https://mandrillapp.com/api/docs/](https://mandrillapp.com/api/docs/).
 
 ## Installation
 
