@@ -7,7 +7,6 @@ _node-mailchimp_ exposes the following features of the MailChimp API to your nod
  * MailChimp API (Versions 1.3, 1.2 and 1.1)
  * MailChimp Export API (Version 1.0)
  * MailChimp Webhooks
- * MailChimp STS API (Version 1.0)
  * MailChimp OAuth2 authorization
  * MailChimp Partner API (Version 1.3)
  * Mandrill API (Version 1.0)
@@ -146,37 +145,6 @@ webhook.on('unsubscribe', function (data, meta) {
 });
 ```
 
-### MailChimp STS API
-
-_MailChimpSTSAPI_ takes two arguments. The first argument is your API key, which you can find in your MailChimp Account. The second argument is an options object which can contain the following options:
-
- * `version` The STS API version to use, currently only 1.0 is available and supported. Defaults to 1.0.
- * `secure` Whether or not to use secure connections over HTTPS (true/false). Defaults to false.
- * `userAgent` Custom User-Agent description to use in the request header.
- 
-The callback function for each API method gets two arguments. The first one is an error object which is null when no error occured, the second one an object with all information retrieved as long as no error occured. 
-
-Example:
-
-```javascript
-var MailChimpSTSAPI = require('mailchimp').MailChimpSTSAPI;
-
-var apiKey = 'Your MailChimp API Key';
-
-try { 
-    var stsApi = new MailChimpSTSAPI(apiKey, { version : '1.0', secure: false });
-} catch (error) {
-    console.log(error.message);
-}
-
-stsApi.VerifyEmailAdress({ email : '/* E-MAIL ADDRESS */'  }, function (error, data) {
-    if (error)
-        console.log(error.message);
-    else
-        console.log(JSON.stringify(data)); // Do something with your data!
-});
-```
-    
 ### MailChimp OAuth2
 
 _MailChimpOAuth_ takes one argument, an options object which can contain the following options:
@@ -316,6 +284,10 @@ mandrill.call('tags', 'time-series', { tag : '/* TAGNAME */'  }, function (error
         console.log(JSON.stringify(data)); // Do something with your data!
 });
 ```
+
+### MailChimp STS API
+
+_MailChimpSTSAPI_ is no longer part of this wrapper as of version 1.0.1 because the API was discontinued by MailChimp.
 	
 ## License
 
