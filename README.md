@@ -4,7 +4,7 @@ A node.js wrapper for the MailChimp API.
 
 _node-mailchimp_ exposes the following features of the MailChimp API to your node.js application:
  
- * MailChimp API (Versions 1.3, 1.2 and 1.1)
+ * MailChimp API (Versions 2.0, 1.3, 1.2 and 1.1)
  * MailChimp Export API (Version 1.0)
  * MailChimp Webhooks
  * MailChimp OAuth2 authorization
@@ -40,11 +40,55 @@ var merge_vars = {
 };
 ```
 
-### MailChimp API
+### MailChimp API (when using MailChimp API version 2.0)
+
+__Attention__: Support for v2.0 of the MailChimp API is not yet well tested. Please use with caution. When in doubt, stick to older versions of the API (v1.x) and skip to the next chapter for documentation.
 
 _MailChimpAPI_ takes two arguments. The first argument is your API key, which you can find in your MailChimp Account. The second argument is an options object which can contain the following options:
 
- * `version` The API version to use (1.1, 1.2 or 1.3). Defaults to 1.3.
+ * `version` The API version to use (1.1, 1.2, 1.3 or 2.0). Defaults to 1.3. Make sure to explicitly use 2.0 here or refer to the next chapter for documentation on older API versions.
+ * `userAgent` Custom User-Agent description to use in the request header.
+
+All of the API categories and methods described in the MailChimp API v2.0 Documentation ([http://apidocs.mailchimp.com/api/2.0](http://apidocs.mailchimp.com/api/2.0) are available in this wrapper. To use them the method `call` is used which takes four parameters:
+
+ * `section` The section of the API method to call (e.g. 'campaigns').
+ * `method` The method to call in the given section.
+ * `params` Parameters to pass to the API method.
+ * `callback` Callback function for returned data or errors with two parameters. The first one being an error object which is null when no error occured, the second one an object with all information retrieved as long as no error occured.
+
+Example:
+
+```javascript
+var MailChimpAPI = require('mailchimp').MailChimpAPI;
+
+var apiKey = 'Your MailChimpAPI API Key';
+
+try { 
+    var api = new MailChimpAPI(apiKey, { version : '2.0' });
+} catch (error) {
+    console.log(error.message);
+}
+
+api.call('campaigns', 'list', { start: 0, limit: 25 }, function (error, data) {
+    if (error)
+        console.log(error.message);
+    else
+        console.log(JSON.stringify(data)); // Do something with your data!
+});
+
+api.call('campaigns', 'template-content', { cid: '/* CAMPAIGN ID */ }, function (error, data) {
+    if (error)
+        console.log(error.message);
+    else
+        console.log(JSON.stringify(data)); // Do something with your data!
+});
+```
+
+### MailChimp API (when using MailChimp API version 1.x)
+
+_MailChimpAPI_ takes two arguments. The first argument is your API key, which you can find in your MailChimp Account. The second argument is an options object which can contain the following options:
+
+ * `version` The API version to use (1.1, 1.2, 1.3 or 2.0). Defaults to 1.3.
  * `secure` Whether or not to use secure connections over HTTPS (true/false). Defaults to false.
  * `userAgent` Custom User-Agent description to use in the request header.
  
