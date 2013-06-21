@@ -76,7 +76,7 @@ api.call('campaigns', 'list', { start: 0, limit: 25 }, function (error, data) {
         console.log(JSON.stringify(data)); // Do something with your data!
 });
 
-api.call('campaigns', 'template-content', { cid: '/* CAMPAIGN ID */ }, function (error, data) {
+api.call('campaigns', 'template-content', { cid: '/* CAMPAIGN ID */' }, function (error, data) {
     if (error)
         console.log(error.message);
     else
