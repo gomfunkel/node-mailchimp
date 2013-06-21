@@ -282,33 +282,13 @@ _MandrillAPI_ takes two arguments. The first argument is your API key, which you
  * `version` The Mandrill API version to use, currently only 1.0 is available and supported. Defaults to 1.0.
  * `secure` Whether or not to use secure connections over HTTPS (true/false). Defaults to false.
  * `userAgent` Custom User-Agent description to use in the request header.
-
-All of the API categories and methods described in the Mandrill API Documentation ([http://apidocs.mailchimp.com](http://apidocs.mailchimp.com)) are available in this wrapper. The method names in this wrapper reflect the method names of the API and are named `category`\_`method` with dashes (-) in method names being replaced by underscores (\_).
-
-The callback function for each API method gets two arguments. The first one is an error object which is null when no error occured, the second one an object with all information retrieved as long as no error occured.
  
-Example:
-
-```javascript
-var MandrillAPI = require('mailchimp').MandrillAPI;
-
-var apiKey = 'Your Mandrill API Key';
-
-try { 
-    var mandrill = new MandrillAPI(apiKey, { version : '1.0', secure: false });
-} catch (error) {
-    console.log(error.message);
-}
-
-mandrill.tags_time_series({ tag : '/* TAGNAME */'  }, function (error, data) {
-    if (error)
-        console.log(error.message);
-    else
-        console.log(JSON.stringify(data)); // Do something with your data!
-});
-```
-    
-A second way to use the Mandrill API is by using the `call` method. This method differentiates between the categories and methods of the Mandrill API more clearly and automatically converts dashes to underscores. The example above using the `call` method looks like this:
+All of the API categories and methods described in the Mandrill API Documentation ([http://apidocs.mailchimp.com](http://apidocs.mailchimp.com)) are available in this wrapper. To use the the method `call` is used which takes four parameters:
+ 
+ * `category` The category of the API method to call (e.g. 'users').
+ * `method` The method to call in the given category.
+ * `params` Parameters to pass to the API method.
+ * `callback` Callback function for returned data or errors with two parameters. The first one being an error object which is null when no error occured, the second one an object with all information retrieved as long as no error occured.
 
 ```javascript
 var MandrillAPI = require('mailchimp').MandrillAPI;
