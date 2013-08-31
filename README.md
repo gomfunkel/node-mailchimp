@@ -13,6 +13,20 @@ _node-mailchimp_ exposes the following features of the MailChimp API to your nod
 
 Further information on the MailChimp API and its features is available at [http://apidocs.mailchimp.com](http://apidocs.mailchimp.com). If you want to know more about the Mandrill API and its features have a look at [https://mandrillapp.com/api/docs/](https://mandrillapp.com/api/docs/).
 
+## Table of Contents
+
+ * [Installation](#installation)
+ * [Usage](#usage)
+   * [MailChimp API (when using MailChimp API version 2.0)](#mailchimp-api-when-using-mailchimp-api-version-20)
+   * [MailChimp API (when using MailChimp API version 1.x)](#mailchimp-api-when-using-mailchimp-api-version-1x)
+   * [MailChimp Export API](#mailchimp-export-api)
+   * [MailChimp Webhooks](#mailchimp-webhooks)
+   * [MailChimp OAuth2](#mailchimp-oauth2)
+   * [MailChimp Partner API](#mailchimp-partner-api)
+   * [Mandrill API](#mandrill-api)
+   * [MailChimp STS API](#mailchimp-sts-api)
+ * [License](#license)
+   
 ## Installation
 
 Installing using npm (node package manager):
