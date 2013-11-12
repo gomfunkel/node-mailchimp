@@ -4,25 +4,14 @@ A node.js wrapper for the MailChimp API.
 
 _node-mailchimp_ exposes the following features of the MailChimp API to your node.js application:
  
- * MailChimp API (Versions 1.3, 1.2 and 1.1)
+ * MailChimp API (Versions 2.0, 1.3, 1.2 and 1.1)
  * MailChimp Export API (Version 1.0)
  * MailChimp Webhooks
- * MailChimp STS API (Version 1.0)
  * MailChimp OAuth2 authorization
+ * MailChimp Partner API (Version 1.3)
  * Mandrill API (Version 1.0)
 
-Further information on the MailChimp API and its features is available at [http://apidocs.mailchimp.com](http://apidocs.mailchimp.com)
-
-## Attention: API changes in 0.9.0
-
-Version 0.9.0 of _node-mailchimp_ changed the API so that your existing applications developed with earlier versions will most probably break. The reason for the changes is being more compliant to node.js code conventions regarding error handling. Please make sure that your applications are refactored to use the new API when updating.
-
-The two important changes are:
-
-1. When throwing errors an error object is now thrown instead of a string like in earlier versions.
-2. Every callback now receives two arguments: The first one is an error object which is null when no error occured, the second one the actual data.
-
-The following documentation is using the new API, please refer to it for examples. 
+Further information on the MailChimp API and its features is available at [http://apidocs.mailchimp.com](http://apidocs.mailchimp.com). If you want to know more about the Mandrill API and its features have a look at [https://mandrillapp.com/api/docs/](https://mandrillapp.com/api/docs/).
 
 ## Installation
 
@@ -41,11 +30,65 @@ Please note that parts of _node-mailchimp_ depend on [request](http://github.com
 
 Information on how to use the MailChimp APIs can be found below. Further information on the API methods available can be found at [http://apidocs.mailchimp.com](http://apidocs.mailchimp.com). You can also find further information on how to obtain an API key, how to set up Webhooks and/or OAuth2 in your MailChimp account and much more on the MailChimp API pages.
 
-### MailChimp API
+Some methods of the MailChimp API take associative arrays as a parameter, for example the parameter `merge_vars` of the [`listSubscribe`](http://apidocs.mailchimp.com/api/1.3/listsubscribe.func.php) method. As there are no associative arrays in JavaScript you simply use an object with its properties being the keys, like in the following example:
+
+```javascript
+var merge_vars = {
+	EMAIL: '/* E-MAIL ADDRESS */',
+	FNAME: '/* FIRST NAME */',
+	LNAME: '/* LAST NAME */'
+};
+```
+
+### MailChimp API (when using MailChimp API version 2.0)
+
+__Attention__: Support for v2.0 of the MailChimp API is not yet well tested. Please use with caution. When in doubt, stick to older versions of the API (v1.x) and skip to the next chapter for documentation.
 
 _MailChimpAPI_ takes two arguments. The first argument is your API key, which you can find in your MailChimp Account. The second argument is an options object which can contain the following options:
 
- * `version` The API version to use (1.1, 1.2 or 1.3). Defaults to 1.3.
+ * `version` The API version to use (1.1, 1.2, 1.3 or 2.0). Defaults to 1.3. Make sure to explicitly use 2.0 here or refer to the next chapter for documentation on older API versions.
+ * `userAgent` Custom User-Agent description to use in the request header.
+
+All of the API categories and methods described in the MailChimp API v2.0 Documentation ([http://apidocs.mailchimp.com/api/2.0](http://apidocs.mailchimp.com/api/2.0) are available in this wrapper. To use them the method `call` is used which takes four parameters:
+
+ * `section` The section of the API method to call (e.g. 'campaigns').
+ * `method` The method to call in the given section.
+ * `params` Parameters to pass to the API method.
+ * `callback` Callback function for returned data or errors with two parameters. The first one being an error object which is null when no error occured, the second one an object with all information retrieved as long as no error occured.
+
+Example:
+
+```javascript
+var MailChimpAPI = require('mailchimp').MailChimpAPI;
+
+var apiKey = 'Your MailChimpAPI API Key';
+
+try { 
+    var api = new MailChimpAPI(apiKey, { version : '2.0' });
+} catch (error) {
+    console.log(error.message);
+}
+
+api.call('campaigns', 'list', { start: 0, limit: 25 }, function (error, data) {
+    if (error)
+        console.log(error.message);
+    else
+        console.log(JSON.stringify(data)); // Do something with your data!
+});
+
+api.call('campaigns', 'template-content', { cid: '/* CAMPAIGN ID */' }, function (error, data) {
+    if (error)
+        console.log(error.message);
+    else
+        console.log(JSON.stringify(data)); // Do something with your data!
+});
+```
+
+### MailChimp API (when using MailChimp API version 1.x)
+
+_MailChimpAPI_ takes two arguments. The first argument is your API key, which you can find in your MailChimp Account. The second argument is an options object which can contain the following options:
+
+ * `version` The API version to use (1.1, 1.2, 1.3 or 2.0). Defaults to 1.3.
  * `secure` Whether or not to use secure connections over HTTPS (true/false). Defaults to false.
  * `userAgent` Custom User-Agent description to use in the request header.
  
@@ -78,7 +121,7 @@ api.campaignStats({ cid : '/* CAMPAIGN ID */' }, function (error, data) {
         console.log(JSON.stringify(data)); // Do something with your data!
 });
 ```
-    
+
 ### MailChimp Export API
 
 _MailChimpExportAPI_ takes two arguments. The first argument is your API key, which you can find in your MailChimp Account. The second argument is an options object which can contain the following options:
@@ -146,37 +189,6 @@ webhook.on('unsubscribe', function (data, meta) {
 });
 ```
 
-### MailChimp STS API
-
-_MailChimpSTSAPI_ takes two arguments. The first argument is your API key, which you can find in your MailChimp Account. The second argument is an options object which can contain the following options:
-
- * `version` The STS API version to use, currently only 1.0 is available and supported. Defaults to 1.0.
- * `secure` Whether or not to use secure connections over HTTPS (true/false). Defaults to false.
- * `userAgent` Custom User-Agent description to use in the request header.
- 
-The callback function for each API method gets two arguments. The first one is an error object which is null when no error occured, the second one an object with all information retrieved as long as no error occured. 
-
-Example:
-
-```javascript
-var MailChimpSTSAPI = require('mailchimp').MailChimpSTSAPI;
-
-var apiKey = 'Your MailChimp API Key';
-
-try { 
-    var stsApi = new MailChimpSTSAPI(apiKey, { version : '1.0', secure: false });
-} catch (error) {
-    console.log(error.message);
-}
-
-stsApi.VerifyEmailAdress({ email : '/* E-MAIL ADDRESS */'  }, function (error, data) {
-    if (error)
-        console.log(error.message);
-    else
-        console.log(JSON.stringify(data)); // Do something with your data!
-});
-```
-    
 ### MailChimp OAuth2
 
 _MailChimpOAuth_ takes one argument, an options object which can contain the following options:
@@ -231,6 +243,37 @@ oauth.on('authed', function (apiKey) {
 	
 });
 ```
+
+### MailChimp Partner API
+
+_MailChimpPartnerAPI_ takes two arguments. The first argument is your app key, which you can generate and find in your MailChimp Account, if you are eligible to use the Partner API. The second argument is an options object which can contain the following options:
+
+ * `version` The Partner API version to use, currently only 1.3 is available and supported. Defaults to 1.3.
+ * `secure` Whether or not to use secure connections over HTTPS (true/false). Defaults to false.
+ * `userAgent` Custom User-Agent description to use in the request header.
+ 
+The callback function for each API method gets two arguments. The first one is an error object which is null when no error occured, the second one an object with all information retrieved as long as no error occured.
+
+Example:
+
+```javascript
+var MailChimpPartnerAPI = require('mailchimp').MailChimpPartnerAPI;
+
+var appKey = 'Your MailChimp app key';
+
+try { 
+    var api = new MailChimpPartnerAPI(appKey, { version : '1.3', secure : false });
+} catch (error) {
+    console.log(error.message);
+}
+
+api.checkUsername({ username: '/* USERNAME */' }, function (error, data) {
+    if (error)
+        console.log(error.message);
+    else
+        console.log(JSON.stringify(data)); // Do something with your data!
+});
+```
 	
 ### Mandrill API
 
@@ -239,33 +282,13 @@ _MandrillAPI_ takes two arguments. The first argument is your API key, which you
  * `version` The Mandrill API version to use, currently only 1.0 is available and supported. Defaults to 1.0.
  * `secure` Whether or not to use secure connections over HTTPS (true/false). Defaults to false.
  * `userAgent` Custom User-Agent description to use in the request header.
-
-All of the API categories and methods described in the Mandrill API Documentation ([http://apidocs.mailchimp.com](http://apidocs.mailchimp.com)) are available in this wrapper. The method names in this wrapper reflect the method names of the API and are named `category`\_`method` with dashes (-) in method names being replaced by underscores (\_).
-
-The callback function for each API method gets two arguments. The first one is an error object which is null when no error occured, the second one an object with all information retrieved as long as no error occured.
  
-Example:
-
-```javascript
-var MandrillAPI = require('mailchimp').MandrillAPI;
-
-var apiKey = 'Your Mandrill API Key';
-
-try { 
-    var mandrill = new MandrillAPI(apiKey, { version : '1.0', secure: false });
-} catch (error) {
-    console.log(error.message);
-}
-
-mandrill.tags_time_series({ tag : '/* TAGNAME */'  }, function (error, data) {
-    if (error)
-        console.log(error.message);
-    else
-        console.log(JSON.stringify(data)); // Do something with your data!
-});
-```
-    
-A second way to use the Mandrill API is by using the `call` method. This method differentiates between the categories and methods of the Mandrill API more clearly and automatically converts dashes to underscores. The example above using the `call` method looks like the this:
+All of the API categories and methods described in the Mandrill API Documentation ([http://apidocs.mailchimp.com](http://apidocs.mailchimp.com)) are available in this wrapper. To use the the method `call` is used which takes four parameters:
+ 
+ * `category` The category of the API method to call (e.g. 'users').
+ * `method` The method to call in the given category.
+ * `params` Parameters to pass to the API method.
+ * `callback` Callback function for returned data or errors with two parameters. The first one being an error object which is null when no error occured, the second one an object with all information retrieved as long as no error occured.
 
 ```javascript
 var MandrillAPI = require('mailchimp').MandrillAPI;
@@ -285,6 +308,10 @@ mandrill.call('tags', 'time-series', { tag : '/* TAGNAME */'  }, function (error
         console.log(JSON.stringify(data)); // Do something with your data!
 });
 ```
+
+### MailChimp STS API
+
+_MailChimpSTSAPI_ is no longer part of this wrapper as of version 1.0.1 because the API was discontinued by MailChimp.
 	
 ## License
 

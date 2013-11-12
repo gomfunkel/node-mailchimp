@@ -2,13 +2,13 @@ var assert = require('assert'),
     vows = require('vows'),
     nock = require('nock');
 
-var apiEndpoint = nock('http://dc.api.mailchimp.com:80').post('/1.3/?method=folderAdd', { apikey: "apiKey-dc" })
-                                                        .reply(200, '{"error":"You must specify a name value for the folderAdd method","code":-90}')
-                                                        .post('/1.3/?method=folderAdd', { apikey: "apiKey-dc", name: "foldername" })
+var apiEndpoint = nock('http://dc.api.mailchimp.com:80').post('/1.3/?method=folderAdd', encodeURIComponent(JSON.stringify({ apikey: "apiKey-dc", name: "foldername" })))
                                                         .reply(200, 123)
-                                                        .post('/1.3/?method=folderAdd', { apikey: "apiKey-dc", name: "foldername", type: "autoresponder" })
+                                                        .post('/1.3/?method=folderAdd', encodeURIComponent(JSON.stringify({ apikey: "apiKey-dc" })))
+                                                        .reply(200, '{"error":"You must specify a name value for the folderAdd method","code":-90}')
+                                                        .post('/1.3/?method=folderAdd', encodeURIComponent(JSON.stringify({ apikey: "apiKey-dc", name: "foldername", type: "autoresponder" })))
                                                         .reply(200, 456)
-                                                        .post('/1.3/?method=folderAdd', { apikey: "apiKey-dc", name: "foldername", type: "autoresponder" })
+                                                        .post('/1.3/?method=folderAdd', encodeURIComponent(JSON.stringify({ apikey: "apiKey-dc", name: "foldername", type: "autoresponder" })))
                                                         .reply(200, 789);
 
 var MailChimpAPI = require('mailchimp').MailChimpAPI;
@@ -40,7 +40,7 @@ vows.describe('MailChimpAPI v1.3').addBatch({
 					assert.instanceOf(error, Error);
 				}
 			},
-	
+			
 			'and calling method "folderAdd" with all arguments': {
 				topic: function (api) { api.folderAdd({ name: "foldername", type: "autoresponder" }, this.callback) },
 				'creates the folder': function (error, data) {

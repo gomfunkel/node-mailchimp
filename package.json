@@ -1,8 +1,9 @@
 {
 	"name" : "mailchimp",
-	"version" : "0.9.5",
+	"version" : "1.1.0",
 	"description" : "A node.js wrapper for the MailChimp API.",
 	"author" : "Daniel Leinich <leinich@gmx.net>",
+	"keywords" : ["mailchimp", "mailchimp api", "email", "mail", "newsletter", "mandrill"],
 	"main" : "./lib/mailchimp",
 	"repository" : {
 		"type" : "git",
