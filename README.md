@@ -283,7 +283,7 @@ _MandrillAPI_ takes two arguments. The first argument is your API key, which you
  * `secure` Whether or not to use secure connections over HTTPS (true/false). Defaults to false.
  * `userAgent` Custom User-Agent description to use in the request header.
  
-All of the API categories and methods described in the Mandrill API Documentation ([http://apidocs.mailchimp.com](http://apidocs.mailchimp.com)) are available in this wrapper. To use the the method `call` is used which takes four parameters:
+All of the API categories and methods described in the Mandrill API Documentation ([https://mandrillapp.com/api/docs/](https://mandrillapp.com/api/docs/)) are available in this wrapper. To use the the method `call` is used which takes four parameters:
  
  * `category` The category of the API method to call (e.g. 'users').
  * `method` The method to call in the given category.
