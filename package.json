@@ -11,7 +11,7 @@
 	},
 	"dependencies": {
 		"request": "2.x.x",
-		"qs": "0.5.x" 
+		"qs": "1.x.x"
 	},
 	"devDependencies": {
 		"vows": "0.6.x",
