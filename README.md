@@ -1,9 +1,3 @@
-# Looking for a Maintainer
-
-As many of you know and some of you already mentioned to me, this project is currently not properly maintained. I simply do not have the time to take care of it as much as I want to.
-
-If you are using _node-mailchimp_ and are interested in being a maintainer, please drop me a line. I want to keep this project alive and thus hope some of you think alike and have a tad more time on their hands to take over.
-
 # node-mailchimp
 
 A node.js wrapper for the MailChimp API.
