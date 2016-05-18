@@ -220,7 +220,7 @@ These fields are not needed if ownServer is false
 You can register the following events:
 
  * `error` This event is emitted when an error occured and receives one argument that contains the error message.
- * `authed` Emitted when the OAuth was completed successfully. Receives one argument which represents the API key that can be passed on to other API functionality.
+ * `authed` Emitted when the OAuth was completed successfully. Receives one argument which represents the API key in custom object with metadata that can be passed on to other API functionality.
 
 Example:
 
@@ -231,22 +231,21 @@ var MailChimpAPI = require('mailchimp').MailChimpAPI;
 var options = {
 	clientId: 'Your MailChimp client id',
 	clientSecret: 'Your MailChimp client secret',
-	serverUri: 'http://www.example.com',
-	redirectUri: 'http://www.example.com/successfulLogin.html'
+	redirectUri: 'http://www.example.com/redirect'
 };
 
 var oauth = new MailChimpOAuth(options);
 
 console.log(oauth.getAuthorizeUri()); // The MailChimp login URI the user needs to be sent to
 
-oauth.on('error', function (error) {
-    console.log(error.message);
+oauth.on('error', function (error, customData) {
+    console.log(error.message, customData);
 });
 
-oauth.on('authed', function (apiKey) {
+oauth.on('authed', function (data) {
 
 	try {
-	    var api = new MailChimpAPI(apiKey, { version : '1.3', secure : false });
+	    var api = new MailChimpAPI(data.apiKey, { version : '1.3', secure : false });
 	} catch (error) {
 	    console.log(error.message);
 	}
