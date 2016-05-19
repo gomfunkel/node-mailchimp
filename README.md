@@ -217,8 +217,8 @@ _MailChimpOAuth_ takes one argument, an options object which can contain the fol
 These fields are not needed if ownServer is false 
  * `finalUri` After a successful authorization on the MailChimp website the user is redirected to this URI, if any.
  * `secure` Credentials in the form {key:path to ssl key file, cert: path to ssl certificate file} . If present HTTPS support is enabled for the server. Defaults to false.
-You can register the following events:
 
+You can register the following events:
  * `error` This event is emitted when an error occured and receives one argument that contains the error message.
  * `authed` Emitted when the OAuth was completed successfully. Receives one argument which represents the API key in custom object with metadata that can be passed on to other API functionality.
 
@@ -231,15 +231,18 @@ var MailChimpAPI = require('mailchimp').MailChimpAPI;
 var options = {
 	clientId: 'Your MailChimp client id',
 	clientSecret: 'Your MailChimp client secret',
-	redirectUri: 'http://www.example.com/redirect'
+	redirectUri: 'http://www.example.com',
+	ownServer: true,
+	addPort: true,
+	finalUri: 'http://www.example.com/successfulLogin.html'
 };
 
 var oauth = new MailChimpOAuth(options);
 
 console.log(oauth.getAuthorizeUri()); // The MailChimp login URI the user needs to be sent to
-
-oauth.on('error', function (error, customData) {
-    console.log(error.message, customData);
+<!-- Error contains custom Data when passed around to know the current status-->
+oauth.on('error', function (error) {
+    console.log(error.err);
 });
 
 oauth.on('authed', function (data) {
