@@ -17,7 +17,7 @@
     "url": "http://github.com/gomfunkel/node-mailchimp.git"
   },
   "dependencies": {
-    "qs": "1.x.x",
+    "qs": "^6.2.0",
     "request": "^2.72.0"
   },
   "devDependencies": {
