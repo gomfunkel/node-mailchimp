@@ -68,7 +68,7 @@ All of the API categories and methods described in the MailChimp API v2.0 Docume
  * `section` The section of the API method to call (e.g. 'campaigns').
  * `method` The method to call in the given section.
  * `params` Parameters to pass to the API method.
- * `callback` Callback function for returned data or errors with two parameters. The first one being an error object which is null when no error occured, the second one an object with all information retrieved as long as no error occured.
+ * `callback` Callback function for returned data or errors with two parameters. The first one being an error object which is null when no error occurred, the second one an object with all information retrieved as long as no error occurred.
 
 Example:
 
@@ -106,7 +106,7 @@ _MailChimpAPI_ takes two arguments. The first argument is your API key, which yo
  * `secure` Whether or not to use secure connections over HTTPS (true/false). Defaults to false.
  * `userAgent` Custom User-Agent description to use in the request header.
 
-The callback function for each API method gets two arguments. The first one is an error object which is null when no error occured, the second one an object with all information retrieved as long as no error occured.
+The callback function for each API method gets two arguments. The first one is an error object which is null when no error occurred, the second one an object with all information retrieved as long as no error occurred.
 
 Example:
 
@@ -144,7 +144,7 @@ _MailChimpExportAPI_ takes two arguments. The first argument is your API key, wh
  * `secure` Whether or not to use secure connections over HTTPS (true/false). Defaults to false.
  * `userAgent` Custom User-Agent description to use in the request header.
 
-The callback function for each API method gets two arguments. The first one is an error object which is null when no error occured, the second one an object with all information retrieved as long as no error occured.
+The callback function for each API method gets two arguments. The first one is an error object which is null when no error occurred, the second one an object with all information retrieved as long as no error occurred.
 
 Example:
 
@@ -219,7 +219,7 @@ These fields are not needed if ownServer is false
  * `secure` Credentials in the form {key:path to ssl key file, cert: path to ssl certificate file} . If present HTTPS support is enabled for the server. Defaults to false.
 
 You can register the following events:
- * `error` This event is emitted when an error occured and receives one argument that contains the error message.
+ * `error` This event is emitted when an error occurred and receives one argument that contains the error message.
  * `authed` Emitted when the OAuth was completed successfully. Receives one argument which represents the API key in custom object with metadata that can be passed on to other API functionality.
 
 Example:
@@ -271,7 +271,7 @@ _MailChimpPartnerAPI_ takes two arguments. The first argument is your app key, w
  * `secure` Whether or not to use secure connections over HTTPS (true/false). Defaults to false.
  * `userAgent` Custom User-Agent description to use in the request header.
 
-The callback function for each API method gets two arguments. The first one is an error object which is null when no error occured, the second one an object with all information retrieved as long as no error occured.
+The callback function for each API method gets two arguments. The first one is an error object which is null when no error occurred, the second one an object with all information retrieved as long as no error occurred.
 
 Example:
 
@@ -307,7 +307,7 @@ All of the API categories and methods described in the Mandrill API Documentatio
  * `category` The category of the API method to call (e.g. 'users').
  * `method` The method to call in the given category.
  * `params` Parameters to pass to the API method.
- * `callback` Callback function for returned data or errors with two parameters. The first one being an error object which is null when no error occured, the second one an object with all information retrieved as long as no error occured.
+ * `callback` Callback function for returned data or errors with two parameters. The first one being an error object which is null when no error occurred, the second one an object with all information retrieved as long as no error occurred.
 
 ```javascript
 var MandrillAPI = require('mailchimp').MandrillAPI;
